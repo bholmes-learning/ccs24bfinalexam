@@ -5,8 +5,8 @@ resource "azurerm_resource_group" "bhmcitrg01" {
 
 resource "azurerm_web_application_firewall_policy" "braeden_mcit_waf" {
   name                = "braedenmcitwaf"
-  resource_group_name = azurerm_resource_group.example.name
-  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.bhmcitrg01.name
+  location            = azurerm_resource_group.bhmcitrg01.location
 
   custom_rules {
     name      = "Rule1"
