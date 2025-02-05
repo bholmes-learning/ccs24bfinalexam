@@ -103,8 +103,8 @@ resource "azurerm_firewall_policy_rule_collection_group" "app_policy_rule_collec
 
 resource "azurerm_firewall" "fw" {
   name                = "azfw"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.bhmcitrg01.location
+  resource_group_name = azurerm_resource_group.bhmcitrg01.name
   sku_name            = "AZFW_VNet"
   sku_tier            = var.firewall_sku_tier
   ip_configuration {
