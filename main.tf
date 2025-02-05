@@ -5,43 +5,43 @@ resource "azurerm_resource_group" "bhmcitrg01" {
 
 resource "azurerm_virtual_network" "azfw_vnet" {
   name                = "azfw-vnet"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.bhmcitrg01.location
+  resource_group_name = azurerm_resource_group.bhmcitrg01.name
   address_space       = ["10.10.0.0/24"]
 }
 
 resource "azurerm_ip_group" "workload_ip_group" {
   name                = "workload-ip-group"
-  resource_group_name = azurerm_resource_group.rg.name
-  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.bhmcitrg01.name
+  location            = azurerm_resource_group.bhmcitrg01.location
   cidrs               = ["10.20.0.0/24", "10.30.0.0/24"]
 }
 resource "azurerm_ip_group" "infra_ip_group" {
   name                = "infra-ip-group"
-  resource_group_name = azurerm_resource_group.rg.name
-  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.bhmcitrg01.name
+  location            = azurerm_resource_group.bhmcitrg01.location
   cidrs               = ["10.40.0.0/24", "10.50.0.0/24"]
 }
 
 resource "azurerm_subnet" "azfw_subnet" {
   name                 = "AzureFirewallSubnet"
-  resource_group_name  = azurerm_resource_group.rg.name
+  resource_group_name  = azurerm_resource_group.bhmcitrg01.name
   virtual_network_name = azurerm_virtual_network.azfw_vnet.name
   address_prefixes     = ["10.10.0.0/26"]
 }
 
 resource "azurerm_public_ip" "pip_azfw" {
   name                = "pip-azfw"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.bhmcitrg01.location
+  resource_group_name = azurerm_resource_group.bhmcitrg01.name
   allocation_method   = "Static"
   sku                 = "Standard"
 }
 
 resource "azurerm_firewall_policy" "azfw_policy" {
   name                     = "azfw-policy"
-  resource_group_name      = azurerm_resource_group.rg.name
-  location                 = azurerm_resource_group.rg.location
+  resource_group_name      = azurerm_resource_group.bhmcitrg01.name
+  location                 = azurerm_resource_group.bhmcitrg01.location
   sku                      = var.firewall_sku_tier
   threat_intelligence_mode = "Alert"
 }
