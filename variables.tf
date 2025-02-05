@@ -1,9 +1,3 @@
-variable "resource_group_location" {
-  type        = string
-  description = "Location for all resources."
-  default     = "canadacentral"
-}
-
 variable "subscription_id"{
   type=string
 }
@@ -16,14 +10,4 @@ variable "client_secret"{
 }
 variable "tenant_id"{
   type=string
-}
-
-variable "firewall_sku_tier" {
-  type        = string
-  description = "Firewall SKU."
-  default     = "Standard" # Valid values are Standard and Premium
-  validation {
-    condition = contains(["Standard", "Premium"], var.firewall_sku_tier)
-    error_message = "The sku must be one of the following: Standard, Premium"
-  }
 }
